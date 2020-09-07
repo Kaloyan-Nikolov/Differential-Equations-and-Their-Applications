@@ -1,11 +1,11 @@
 function Tema12
 
     function z=ff(t,y)
-        % за точка (1;0)
+        % for point (1;0)
         z=[-2*y(1)+2; -y(2)];
-        % за точка (0;0)
+        % for point (0;0)
         %z=[y(1); -y(2)];
-        % за точка (-1;0)
+        % for point (-1;0)
         %z=[-2*y(1)-2; -y(2)];
     end
 
@@ -17,18 +17,18 @@ hold on;
 grid on;
 daspect([1 1 1])
 
-% можем да изобразим повече фазови криви като намалим стъпката
+% we determine the step
 x=-3:0.5:3;
 y=-3:0.5:3;
 
 [X,Y]=meshgrid(x,y);
 
-%чертаем равновесните точки на системата
+% we draw the equilibrium point
 plot(1, 0, 'k*')
 %plot(0, 0, 'k*')
 %plot(-1, 0, 'k*')
 
-%чертаем фазов портрет
+% we draw the phase portrait
 for i=1:length(x)
        for j=1:length(y)
             [T,Z]=ode45(@ff, [0, tmax], [X(i,j), Y(i,j)]);
@@ -39,22 +39,22 @@ for i=1:length(x)
        end
 end
 
-% тангенциални вектори:
-% за точка (1;0)
+% tangent vectors:
+% for point (1;0)
 DX=-2*X+2;
 DY=-Y;
-% за точка (0;0)
+% for point (0;0)
 %DX=X;
 %DY=-Y;
-% за точка (-1;0)
+% for point (-1;0)
 %DX=-2*X - 2;
 %DY=-Y;
 
-%чертаем ненормирани тангенциални вектори
+% we draw the non-normalized tangent vectors
 %quiver(X, Y, DX, DY, 1.5, 'k');
 
-%нормираме тангенциалните вектори
+% we will normalize the tangent vectors
 D=sqrt(DX.^2+DY.^2);
-%чертаем тангенциалните вектори
+% we draw the normalized tangent vectors
 quiver(X,Y,DX./D,DY./D,0.5,'k')
 end
